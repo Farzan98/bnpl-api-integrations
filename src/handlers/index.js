@@ -41,9 +41,11 @@ module.exports.directPayHandler = async (req, res) => {
         }
       )
       .then((result) => {
+        console.log(`Sucess ---- `, result);
         return res.send(result.data);
       })
       .catch((err) => {
+        console.log(`err ---- `, err);
         return res.send(err.response.data);
       });
   } catch (error) {}
