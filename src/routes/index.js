@@ -7,4 +7,5 @@ module.exports = (app) => {
   app.use(express.json());
   app.post("/create-access-token", handler.createAccessTokenHandler);
   app.post("/direct-pay", handler.directPayHandler);
+  app.post("/create-order", handler.createOrderHandler);
 };
