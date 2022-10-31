@@ -6,7 +6,7 @@ module.exports.createAccessTokenHandler = async (req, res) => {
 
     await axios
       .post(
-        "https://e710-72-255-1-2.in.ngrok.io/api/merchant/create-access-token",
+        "http://127.0.0.1:1090/create-access-token",
         body,
         {
           headers: {
