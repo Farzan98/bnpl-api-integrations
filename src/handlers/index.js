@@ -6,7 +6,7 @@ module.exports.createAccessTokenHandler = async (req, res) => {
 
     await axios
       .post(
-        "http://127.0.0.1:1090/create-access-token",
+        "https://e710-72-255-1-2.in.ngrok.io/api/merchant/v1/create-access-token",
         body,
         {
           headers: {
@@ -58,12 +58,16 @@ module.exports.createOrderHandler = async (req, res) => {
     const requestBody = req.body;
     const token = req.headers.authorization.split(" ")[1];
     await axios
-      .post("http://127.0.0.1:1090/create-order", requestBody, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post(
+        "https://e710-72-255-1-2.in.ngrok.io/api/merchant/v1/create-order",
+        requestBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((result) => {
         console.log(`Sucess ---- `, result);
         return res.send(result.data);
