@@ -1,11 +1,12 @@
 const Config = require("../../config/config");
+console.log(`this ---- `, Config.DB_USER);
 
 module.exports = {
   development: {
-    username: Config.DB_USER,
-    password: Config.DB_PASSWORD,
-    database: Config.DB_NAME,
-    host: Config.DB_HOST,
+    username: "admin",
+    password: "tSESiLcNP,=bnrF]n+P#",
+    database: "merchant_app",
+    host: "svc-4475f708-f093-4ce9-8739-c335095d585b-dml.aws-mumbai-1.svc.singlestore.com",
     dialect: "mysql",
     migrationStorage: "json",
     migrationStoragePath: "migrations/sequelizeMeta.json",

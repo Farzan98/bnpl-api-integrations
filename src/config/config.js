@@ -1,5 +1,3 @@
-console.log(process.env.url);
-
 module.exports = {
   PUBLICKEY: process.env.PUBLICKEY,
   SECRETKEY: process.env.SECRETKEY,
