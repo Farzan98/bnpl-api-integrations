@@ -28,12 +28,18 @@ module.exports.directPayHandler = async (req, res) => {
     const requestBody = req.body;
     const availableScopes = Config.scopes.split(",");
 
+    /**
+     * create acceess token config
+     */
     const accessTokenBody = {
       PUBLICKEY: Config.PUBLICKEY,
       SECRETKEY: Config.SECRETKEY,
       scopes: [availableScopes[0], availableScopes[1], availableScopes[2]],
     };
 
+    /**
+     * Check if order exists with merchant order id
+     */
     const findOrder = await Models.Order.findOne({
       where: {
         merchantOrderId: requestBody.merchantOrderId,
@@ -48,6 +54,9 @@ module.exports.directPayHandler = async (req, res) => {
       });
     }
 
+    /**
+     * Create access token if order not available
+     */
     await axios
       .post(`${Config.url}/merchant/v1/create-access-token`, accessTokenBody, {
         headers: {
@@ -58,6 +67,9 @@ module.exports.directPayHandler = async (req, res) => {
         if (result) {
           const token = result.data.data;
 
+          /**
+           * Upon success order creation of access token, create order
+           */
           const order = await Models.Order.create({
             ...requestBody,
             paymentStatus: "pending",
@@ -70,6 +82,9 @@ module.exports.directPayHandler = async (req, res) => {
             });
           }
 
+          /**
+           * Upon success order creation of access token, send direct pay request to bnpl
+           */
           await axios
             .post(`${Config.url}/customer/instalment/direct-pay`, requestBody, {
               headers: {
